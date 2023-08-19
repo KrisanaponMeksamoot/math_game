@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>n-digit addition | Kumon Math Game</title>
+        <link rel="stylesheet" href="practice_template.css">
+    </head>
+    <body>
+        <h1>Kumon Math Game</h1>
+        <h2>n-digit addition</h2>
+        <div id="container">
+            <input type="number" min="1" step="1" onchange="n=this.valueAsNumber;" value="1">
+            <button onclick="startTest(10,generate,onfinish);">Start Test</button>
+        </div>
+        <script src="activity_base.js"></script>
+        <script>
+            var n=0;
+            function generate(i) {
+                let a = randInt(1,10**n);
+                let b = randInt(1,10**n);
+                return {q:`${a}+${b}`,a:`${a+b}`};
+            }
+            function onfinish(score, fullscore) {
+                container.appendChild(document.createTextNode(`Score: ${score}/${fullscore}`));
+                let inp = document.createElement("input");
+                inp.onchange = ()=>n=inp.valueAsNumber;
+                inp.type = "number";
+                inp.min = 1;
+                inp.step = 1;
+                inp.value = n;
+                container.appendChild(inp);
+                let btn = document.createElement("button");
+                btn.innerText = "Restart";
+                btn.onclick = ()=>startTest(10,generate,onfinish);
+                container.appendChild(btn);
+            }
+        </script>
+    </body>
+</html>

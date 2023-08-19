@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>1-digit addition | Kumon Math Game</title>
+        <link rel="stylesheet" href="practice_template.css">
+    </head>
+    <body>
+        <h1>Kumon Math Game</h1>
+        <h2>1-digit addition</h2>
+        <div id="container">
+            <button onclick="startTest(10,generate,onfinish);">Start Test</button>
+        </div>
+        <script src="activity_base.js"></script>
+        <script>
+            function generate(i) {
+                let a = randInt(1,10);
+                let b = randInt(1,10);
+                return {q:`${a}+${b}`,a:`${a+b}`};
+            }
+            function onfinish(score, fullscore) {
+                container.appendChild(document.createTextNode(`Score: ${score}/${fullscore}`));
+                let btn = document.createElement("button");
+                btn.innerText = "Restart";
+                btn.onclick = ()=>startTest(10,generate,onfinish);
+                container.appendChild(btn);
+            }
+        </script>
+    </body>
+</html>
