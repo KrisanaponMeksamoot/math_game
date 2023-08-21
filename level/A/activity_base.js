@@ -7,6 +7,8 @@ let finish_cb = undefined;
 
 function startTest(q_num,generator,onfinish=undefined) {
     let table = document.createElement("table");
+    let tbody = document.createElement("tbody");
+    table.appendChild(tbody);
     let last_inp = null;
     let last_ans;
     for (let i=0;i<q_num;i++) {
@@ -24,7 +26,7 @@ function startTest(q_num,generator,onfinish=undefined) {
         last_ans = q.a;
         td_a.appendChild(inp);
         tr.appendChild(td_a);
-        table.appendChild(tr);
+        tbody.appendChild(tr);
     }
     last_inp.onkeydown = getCallBack(last_ans);
     score = 0;
@@ -32,6 +34,7 @@ function startTest(q_num,generator,onfinish=undefined) {
     fullscore = q_num;
     finish_cb = onfinish;
     container.replaceChildren(table);
+    tbody.firstChild.lastChild.firstChild.focus();
 }
 
 function getCallBack(ans,next=undefined) {
@@ -39,7 +42,7 @@ function getCallBack(ans,next=undefined) {
 }
 
 function check(e,ans,next=undefined) {
-    if (e.code != "Enter")
+    if (e.key != "Enter")
         return;
     let inp = e.target;
     if (checkAns(inp.value,ans)) {
